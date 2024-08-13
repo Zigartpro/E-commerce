@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Factura</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+    <style>
+      .float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #818f86;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .my-float {
+        width: 30px; /* Adjust the width and height of the image */
+        height: 30px;
+      }
+    </style>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+
+      .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+      }
+
+      .invoice-header,
+      .invoice-to,
+      .payment-method,
+      .totals,
+      .terms,
+      .footer {
+        margin-bottom: 20px;
+      }
+
+      .invoice-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #4caf50;
+        padding-bottom: 10px;
+      }
+
+      .company-info {
+        text-align: left;
+      }
+
+      .invoice-details {
+        text-align: right;
+      }
+
+      .invoice-details h2 {
+        color: #4caf50;
+      }
+
+      .invoice-to,
+      .payment-method {
+        display: inline-block;
+        width: 48%;
+        vertical-align: top;
+      }
+
+      .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      .invoice-table th,
+      .invoice-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .invoice-table th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .totals div {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+      }
+
+      .totals .grand-total h3 {
+        color: #4caf50;
+      }
+
+      .terms h4,
+      .footer p {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .invoice-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .invoice-to,
+        .payment-method {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-box">
+      <header class="invoice-header">
+        <div class="company-info">
+          <h1>Net Pro Shop</h1>
+          <p>3227007466</p>
+          <p>xxnetproshop@gmail.com</p>
+          <p>www.NetProShop.com</p>
+        </div>
+        <div class="invoice-details">
+          <h2>Factura</h2>
+          <p>No Factura: 01234567</p>
+          <p>Fecha: 10/12/2030</p>
+        </div>
+      </header>
+
+      <section class="invoice-to">
+        <h3>FACTURA PARA</h3>
+        <p>{{ usuario.Nombre }}</p>
+        <p>
+          {{ usuario.Departamento }}, {{ usuario.Municipio }},
+          {{usuario.Direccion }}
+        </p>
+        <p>{{ usuario.Correo }}</p>
+        <p>{{ usuario.Telefono }}</p>
+      </section>
+
+      <section class="payment-method">
+        <h3>METODO DE PAGO</h3>
+        <p>PAYPAL</p>
+      </section>
+
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>NOMBRE</th>
+            <th>CANTIDAD</th>
+            <th>PRECIO</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for producto in productos %}
+          <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>${{ producto.precio }}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td>Envio</td>
+            <td></td>
+            <td>$15000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <section class="totals">
+        <div class="subtotal">
+          <p>SUB TOTAL</p>
+          <p>{{ compras.idventa.Valor }}</p>
+        </div>
+        <div class="discount">
+          <p>DESCUENTO</p>
+          <p>NO APLICADO</p>
+        </div>
+        <div class="grand-total">
+          <h3>VALOR TOTAL</h3>
+          <h3>{{ compras.idventa.Valor }}</h3>
+        </div>
+      </section>
+      <footer class="footer">
+        <p>GRACIAS POR TU COMPRA ESTAMOS PARA SERVIRTE!!</p>
+      </footer>
+    </div>
+    <a href="/" class="float" target="_blank">
+      <img
+        src='{% static "imagenes/home.png" %}'
+        class="my-float"
+        alt="WhatsApp"
+      />
+    </a>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!-- editar_usuario.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Usuario</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h2 class="mt-4">Editar Usuario</h2>
+  <form method="post" action="{% url 'editar_usuario' usuario.NumeroDocumento %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" value="{{ usuario.Nombre }}" required>
+    </div>
+    <div class="form-group">
+      <label for="telefono">Teléfono:</label>
+      <input type="text" class="form-control" id="telefono" name="telefono" value="{{ usuario.Telefono }}" required>
+    </div>
+    <div class="form-group">
+      <label for="correo">Correo:</label>
+      <input type="email" class="form-control" id="correo" name="correo" value="{{ usuario.Correo }}" required>
+    </div>
+    <div class="form-group">
+      <label for="codigo_postal">Código Postal:</label>
+      <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" value="{{ usuario.CodigoPostal }}" required>
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección:</label>
+      <input type="text" class="form-control" id="direccion" name="direccion" value="{{ usuario.Direccion }}" required>
+    </div>
+    <div class="form-group">
+      <label for="municipio">Municipio:</label>
+      <input type="text" class="form-control" id="municipio" name="municipio" value="{{ usuario.Municipio }}" required>
+    </div>
+    <div class="form-group">
+      <label for="departamento">Departamento:</label>
+      <input type="text" class="form-control" id="departamento" name="departamento" value="{{ usuario.Departamento }}" required>
+    </div>
+    <div class="form-group">
+      <label for="rol">Rol:</label>
+      <select class="form-control" id="rol" name="rol" required>
+        <option value="">Seleccione un rol</option>
+        <option value="1" {% if usuario.idRol == 1 %} selected {% endif %}>1</option>
+        <option value="2" {% if usuario.idRol == 2 %} selected {% endif %}>2</option>
+        <option value="3" {% if usuario.idRol == 3 %} selected {% endif %}>3</option>
+        <option value="4" {% if usuario.idRol == 4 %} selected {% endif %}>4</option>
+        <option value="5" {% if usuario.idRol == 5 %} selected {% endif %}>5</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

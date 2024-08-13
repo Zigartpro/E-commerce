@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+          background-image: url('{% static "imagenes/prueba.jpeg" %}');
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 70%;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        @media (max-width: 576px) {
+            .form-group {
+                margin-bottom: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Editar Producto</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="Nombre" value="{{ producto.Nombre }}">
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select class="form-control" id="categoria" name="Categoria" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Herramientas Eléctricas" {% if producto.Categoria == 'Herramientas Eléctricas' %} selected {% endif %}>Herramientas Eléctricas</option>
+                    <option value="Herramientas Manuales" {% if producto.Categoria == 'Herramientas Manuales' %} selected {% endif %}>Herramientas Manuales</option>
+                    <option value="Maquinaria" {% if producto.Categoria == 'Maquinaria' %} selected {% endif %}>Maquinaria</option>
+                    <option value="Instrumentos Medicion" {% if producto.Categoria == 'Instrumentos Medicion' %} selected {% endif %}>Instrumentos Medicion</option>
+                    <option value="Accesorios" {% if producto.Categoria == 'Accesorios' %} selected {% endif %}>Electrónicos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="number" class="form-control" id="valor" name="Valor" value="{{ producto.Valor }}">
+            </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" class="form-control" id="marca" name="Marca" value="{{ producto.Marca }}">
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea class="form-control" id="descripcion" name="Descripcion">{{ producto.Descripcion }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="foto">Foto:</label>
+                <input type="file" class="form-control-file" id="foto" name="Foto">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <p></p>
+        </form>
+    </div>
+</body>
+</html>
+

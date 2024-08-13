@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Login</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+		}
+		body {
+			font-family: Arial, sans-serif;
+			background-image: url('{% static "imagenes/fondo.jpg" %}');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			max-width: 400px;
+			margin: 100px auto;
+			background-color: rgba(255, 255, 255, 0.4);
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		.container h1 {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.container input[type="text"],.container input[type="password"] {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 15px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			box-sizing: border-box;
+		}
+		.container button {
+			width: 100%;
+			padding: 15px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+		@media (max-width: 480px) {
+			.container {
+				margin-top: 50px;
+			}
+			.container input[type="text"],.container input[type="password"] {
+				padding: 8px;
+			}
+			.container button {
+				padding: 12px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Login</h1>
+		<form action="{% url 'login' %}" method="post">
+			{% csrf_token %}
+			<label for="NumeroDocumento">Documento:</label><br>
+			<input type="text" id="NumeroDocumento" name="NumeroDocumento"><br>
+			<label for="password">Contraseña:</label><br>
+			<input type="password" id="password" name="password"><br>
+			<button type="submit" onclick=mostrarAlerta()>Iniciar sesión</button>
+		</form>
+		<div class="alert alert-danger" id="alerta" style="display: none;">
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+				<!-- Contenido de la alerta -->
+				{% if messages %}
+					{% for m in messages %}
+						{{ m }}
+					{% endfor %}
+				{% endif %}
+			</div>
+	</div>
+	<script>
+        // Función para mostrar la alerta
+        function mostrarAlerta() {
+            var alerta = document.getElementById('alerta');
+            var mensajes = document.querySelector('.messages');
+            var contenido = mensajes.innerHTML; // Obtener el contenido de los mensajes
+            alerta.innerHTML = contenido; // Insertar el contenido en la alerta
+            alerta.style.display = 'block'; // Mostrar la alerta
+            setTimeout(function() {
+                alerta.style.display = 'none'; // Ocultar la alerta después de 3 segundos
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

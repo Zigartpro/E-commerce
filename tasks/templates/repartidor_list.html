@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Repartidores</title>
+  </head>
+  <body>
+    <h1>Lista de Repartidores</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Venta</th>
+        <th>Repartidor</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+      {% for repartidor in repartidores %}
+      <tr>
+        <td>{{ repartidor.idrepartidor }}</td>
+        <td>{{ repartidor.Venta.idVenta }}</td>
+        <td>{{ repartidor.repartidor }}</td>
+        <td>{{ repartidor.estador }}</td>
+        <td>
+          <a href="{% url 'edit_repartidor' repartidor.idrepartidor %}"
+            >Editar</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="{% url 'create_repartidor' %}">Crear nuevo Repartidor</a>
+  </body>
+</html>

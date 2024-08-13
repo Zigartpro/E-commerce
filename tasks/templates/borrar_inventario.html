@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Borrar Inventario</title>
+    <style>
+      /* Estilos generales */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f8f9fa;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      p {
+        margin-bottom: 20px;
+        color: #555;
+        text-align: center;
+      }
+      /* Estilos para el formulario */
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+      .button-container {
+        text-align: center;
+      }
+      button[type="submit"],
+      a {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+        color: #fff;
+        text-decoration: none;
+      }
+      button[type="submit"] {
+        background-color: #dc3545;
+      }
+      button[type="submit"]:hover {
+        background-color: #c82333;
+      }
+      /* Estilos para el enlace de cancelar */
+      a {
+        background-color: #007bff;
+      }
+      a:hover {
+        background-color: #0056b3;
+      }
+      /* Estilos para la responsividad */
+      @media (max-width: 768px) {
+        form {
+          padding: 10px;
+        }
+        button[type="submit"] {
+          padding: 8px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Borrar Inventario</h1>
+    <p>¿Estás seguro de que deseas borrar este producto del inventario?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="button-container">
+        <button type="submit">Sí, borrar</button>
+        <a href="{% url 'lista_inventarios' %}">Cancelar</a>
+      </div>
+    </form>
+  </body>
+</html>

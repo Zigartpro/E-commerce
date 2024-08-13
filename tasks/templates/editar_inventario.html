@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agregar Inventario</title>
+    <style>
+      /* Estilos generales */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f8f9fa;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      /* Estilos para el formulario */
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+      select,
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      button[type="submit"],
+      a {
+        width: 48%;
+        padding: 10px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+      button[type="submit"] {
+        background-color: #007bff;
+      }
+      button[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+      a {
+        background-color: #dc3545;
+      }
+      a:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Agregar Inventario</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="idproducto">Producto:</label>
+      <select id="idproducto" name="idproducto">
+        {% for producto in productos %}
+        <option value="{{ producto.idProducto }}">{{ producto.Nombre }}</option>
+        {% endfor %}
+      </select>
+      <label for="cantidad">Cantidad:</label>
+      <input type="number" id="cantidad" name="cantidad" required />
+      <div class="button-container">
+        <button type="submit">Guardar</button>
+        <a href="{% url 'lista_inventarios' %}">Cancelar</a>
+      </div>
+    </form>
+  </body>
+</html>
